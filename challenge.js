@@ -71,26 +71,27 @@ let commentInput = document.querySelector('input');
             }
         });
 
-        // 1. Create an li whose initial value is going to be 1 on first click
-        // 2. If clicked again, check if ul has child node inside if so grab node/check value.
+       let likesCount = {};
 
         let likesChild = document.querySelector('.likes')
 
         const taskLi = document.createElement("li");
-        function appendLikes(){
-            
-            if(likesChild.innerHTML != null) {
-                likesChild = parseInt(likesChild.innerHTML) + 1 ;
-                // likesChild.innerHTML = likesTotal;
-         } else {
+        
+    function appendLikes(){
 
-                taskLi.innerText = 0; 
-                taskLi.innerText = parseInt(taskLi.innerText) + 1
-                document.querySelector(".likes").append(taskLi); 
-        } }
+        if(taskLi.innerText) {
+            taskLi.innerText = (parseInt(taskLi.innerText) + 1).toString();
+        } else {
+            taskLi.innerText= "1";  
+        }
+        
+        likesChild.append(taskLi);        
+    } 
+  
 
-
-        likeBtn.addEventListener('click', appendLikes)  
+        document.addEventListener("DOMContentLoaded", () => {
+            likeBtn.addEventListener('click', appendLikes)  
+        })
            
  
       
