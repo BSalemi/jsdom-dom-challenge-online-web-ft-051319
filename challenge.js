@@ -1,4 +1,5 @@
-
+let likesChild = document.querySelector('.likes')
+let likesCount = {};
 // console.log(commentList);
 // console.log(commentForm);
 let pauseBtn = document.getElementById('pause');
@@ -20,6 +21,8 @@ let counterId = document.getElementById('counter');
 
 function increment() {
     counterId.innerText = parseInt(counterId.innerText) + 1;
+    let hashCount = likesCount[counterId.innerText]
+    likesChild.innerHTML = hashCount ? `<li>${likesCount[counterId.innerText]}</li>` : ``
  };
 
 let interval = setInterval(increment, 1000);
@@ -30,6 +33,8 @@ let interval = setInterval(increment, 1000);
 
 function decrement() {
     counterId.innerText = parseInt(counterId.innerText) - 1;
+    let hashCount = likesCount[counterId.innerText]
+    likesChild.innerHTML = hashCount? `<li>${likesCount[counterId.innerText]}</li>` : ""
 };
 
 minusBtn.addEventListener('click', function(){
@@ -71,27 +76,40 @@ let commentInput = document.querySelector('input');
             }
         });
 
-       let likesCount = {};
+      
+        // Code for what to do when the like button is pressed for a second
+        // Step 1. Grab second in counter
+           let secondNum = counterId.innerText 
+        // Step 2. Sets value of secondNum as a key to 1
+            if (likesCount[secondNum]) {
+                likesCount[secondNum] += 1
+            } else {
+                likesCount[secondNum] = 1
+            }
 
-        let likesChild = document.querySelector('.likes')
 
-        const taskLi = document.createElement("li");
         
-    function appendLikes(){
-
-        if(taskLi.innerText) {
-            taskLi.innerText = (parseInt(taskLi.innerText) + 1).toString();
-        } else {
-            taskLi.innerText= "1";  
-        }
+    function updateLikes(){
         
-        likesChild.append(taskLi);        
+        let secondNum = counterId.innerText 
+        
+            if (likesCount[secondNum]) {
+                likesCount[secondNum] += 1
+            } else {
+                likesCount[secondNum] = 1
+            }
+            //the purpose of this line of code is just to make changes on the dom that reflect the like count
+            //for the given second
+            console.log(likesCount)
+            likesChild.innerHTML = `<li>${likesCount[secondNum]}</li>`  
     } 
   
 
         document.addEventListener("DOMContentLoaded", () => {
-            likeBtn.addEventListener('click', appendLikes)  
+            likeBtn.addEventListener('click', updateLikes)  
         })
+
+        // Keep track of #num_likes per each particular number 
            
  
       
